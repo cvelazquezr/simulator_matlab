@@ -2,6 +2,10 @@ function [ register, sp_x, sp_y, ep_x, ep_y ] = register_simulated(number, ampli
 
 register = [];
 factor = -1;
+sp_x = zeros(number); sp_x = sp_x(1, :);
+sp_y = zeros(number); sp_y = sp_y(1, :);
+ep_x = zeros(number); ep_x = ep_x(1, :);
+ep_y = zeros(number); ep_y = ep_y(1, :);
 
 % Generando las sácadas que formarán el registro
 for i=1:number
@@ -78,7 +82,8 @@ register = horzcat(initial_fixation, register);
 load('noise_mean.mat');
 load('noise_std.mat');
 
-noise_register = [];
+noise_register = zeros(719);
+noise_register = noise_register(1, :);
 
 for i=1:length(noise_std)
     point_std = noise_std(i);

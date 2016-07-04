@@ -104,6 +104,7 @@ if (nargin<5) || isempty(options)
 end
 
 % stuff into a struct to pass around
+global params;
 params.args = varargin;
 params.LB = LB;
 params.UB = UB;
@@ -235,16 +236,18 @@ x = xtransform(xu,params);
 x = reshape(x,xsize);
 
 % Use a nested function as the OutputFcn wrapper
-  function stop = outfun_wrapper(x,varargin);
+
+end % mainline end
+
+function stop = outfun_wrapper(x,varargin)
+    global params;
     % we need to transform x first
     xtrans = xtransform(x,params);
     
     % then call the user supplied OutputFcn
     stop = params.OutputFcn(xtrans,varargin{1:(end-1)});
     
-  end
-
-end % mainline end
+ end
 
 % ======================================
 % ========= begin subfunctions =========
